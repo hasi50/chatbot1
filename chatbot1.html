@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chatbot generator</title>
+  <style>
+    
+            *{
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+            body{
+                background-color: lightgray;
+            }
+            .chatbot{
+                position: fixed;
+    width: 95%;
+    border-radius: 18px;
+    background-color: white;
+    top: 8%;
+    left: 2%;
+    box-shadow: 2px 3px 3px 4px gray;
+            }
+            .chatbot header{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: purple;
+                color: white;
+                height: 6vh;
+                font-size: 40px;
+                border-radius: 10px;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+
+                .chatbot .chatbox{
+            height: 75vh;
+            overflow-y: auto;
+            padding: 30px 20px 70px;
+            list-style: none;
+        
+            }
+            .chatbot p{
+                
+    color: black;
+    font-size: 24px;
+    margin-left: 5%;
+    border-radius: 12px;
+    /* height: 72px; */
+    padding: 15px 14px;
+    max-width: 83%;
+ 
+            }
+           
+            .outgoing p{
+                margin-top: 1%;
+                background-color: lightgrey;
+                position: relative;
+    left: -25px
+            }
+            .chatbox span img{
+                position: relative;
+                top: 62px;
+            }
+            .chatbox .incoming{
+                margin-top: -2%;
+            }
+            .inputfield{
+                position: absolute;
+    bottom: 0%;
+    width: 102%;
+    display: flex
+;
+    left: -2px;
+            }
+            .inputfield textarea{
+                width: 100%;
+    height: 7vh;
+    border-radius: 9px;
+    font-size: 24px;
+    padding: 11px 40px;
+            }
+            #sendbtn{
+                display: flex;
+                align-self: flex-end;
+                justify-content: flex-end;
+            }
+            #sendbtn img{
+                position: relative;
+    left: -86px;
+    height: 5vh;
+    top: -9px;
+    visibility: hidden;
+            }
+         
+            .inputfield textarea:valid ~ #sendbtn img{
+                visibility: visible;
+            }
+       @media screen and (max-width:913px) and (min-width:800px) {
+        .inputfield{
+                position: absolute;
+    bottom: 0%;
+    width: 108%;
+                }
+       }
+            @media screen  and (max-width:442px){
+                .inputfield textarea{
+                width: 100%;
+    height: 6vh;
+    border-radius: 5px;
+    font-size: 17px;
+    padding: 11px 40px;
+            }
+            }
+            @media screen and (max-width:934px) {
+                .chatbox span img{
+                position: relative;
+               left: -11px;
+            }
+            }
+            @media screen and (max-width:710px) {
+                .chatbot p{
+                
+                    margin-left: 15%;
+                    font-size: 23px;
+                   
+                        }
+            }
+            @media screen and (max-width:400px) {
+                .chatbot p{
+                
+                margin-left: 13%;
+                font-size: 23px;
+                    }
+                
+            }
+            @media screen and (max-width:768px) {
+                .inputfield{
+                position: absolute;
+    bottom: 0%;
+    width: 106%;
+                }
+            }
+  .incoming img{
+    position: relative;
+    top: 55px;
+  }
+  .chatbot .outgoing{
+    display: flex;
+  }
+  @media screen and (max-width:500px) {
+    #sendbtn img {
+    position: relative;
+    left: -55px;
+    height: 5vh;
+    top: -3px;
+    visibility: hidden;
+}
+.chatbot p{
+  font-size: 18px;
+}
+  }
+  @media screen and (max-width:900px) and (min-width:800px) {
+    #sendbtn img {
+    position: relative;
+    left: -50px;
+    height: 5vh;
+    top: -3px;
+    visibility: hidden;
+}
+            }
+  </style>
+</head>
+<body>
+  <div class="chatbot">
+    <header>Chatbot</header>
+    <ul class="chatbox">
+      <li class="chat incoming">
+        <span>
+          <img src="icons8-chat-bot-50.png" alt="" />
+          <p>Hi there ✋ How can I help you today <br /></p>
+        </span>
+      </li>
+      <li class="chat outgoing">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt,
+          assumenda. Est omnis tempore nemo dolores animi minus quidem quo quae
+          at, unde sequi beatae autem laudantium fuga, praesentium officiis
+          ipsam!
+        </p>
+      </li>
+    </ul>
+    <div class="inputfield">
+      <textarea rows="" cols="" placeholder="Enter your message..." required></textarea>
+      <div id="sendbtn">
+        <img src="icons8-arrow-right-64.png" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+ let chatbot = document.querySelector('.chatbox')
+ let incoming = document.querySelector('.incoming')
+ let outcoming = document.querySelector('.outcoming')
+ let inputfield = document.querySelector('.inputfield textarea')
+ let sendbtn = document.querySelector('#sendbtn');
+ let usermessage;
+ const API_KEY = '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'
+ 
+
+function generator(incoming){
+    const API_URL = "https://openrouter.ai/api/v1/chat/completions";
+    let elem = incoming.querySelector('p')
+    const requestOptions = {
+        method: "POST",
+  headers: {
+    "Authorization": "barier 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",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+      "model": "deepseek/deepseek-r1:free",
+    messages: [
+                        { role: "system", content: "You are a helpful chatbot." },
+                        { role: "user", content: usermessage },
+                    ],
+  })
+}
+    fetch(API_URL,requestOptions)
+.then(res => res.json())
+.then((data) =>{
+  
+  elem.textContent = data.choices[0].message.content
+
+})
+.catch((error) =>{
+    elem.textContent = 'oops you are writing wrong'
+})
+    
+}
+ 
+
+function inputgenerator(usermessage,className){
+let chatli = document.createElement('li');
+chatli.classList.add('chat',className)
+let createli = className =='outgoing'? `<p>${usermessage}</p>`:`
+          <img src="icons8-chat-bot-50.png" alt="" />
+          <p>${usermessage}</p>`
+      chatli.innerHTML = createli
+        return chatli
+}
+
+function handleinput(){
+usermessage = inputfield.value.trim()
+if(!usermessage) return
+
+chatbot.appendChild(inputgenerator(usermessage,"outgoing"));
+setTimeout(() => {
+    const incoming =  inputgenerator("Thinking...",'incoming');
+    chatbot.appendChild(incoming)
+    generator(incoming)
+}, 600);
+
+}
+
+ sendbtn.addEventListener('click',handleinput)
+  </script>
+</body>
+</html>
+
+
+
+
