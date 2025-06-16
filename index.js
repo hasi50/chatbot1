@@ -62,4 +62,3 @@ setTimeout(() => {
 }
 
  sendbtn.addEventListener('click',handleinput)
-  
