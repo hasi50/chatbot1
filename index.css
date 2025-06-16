@@ -61,7 +61,7 @@
             }
             .inputfield{
                 position: absolute;
-    bottom: 0%;
+    bottom: -1%;
     width: 102%;
     display: flex
 ;
