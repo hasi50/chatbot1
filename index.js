@@ -4,7 +4,7 @@
  let inputfield = document.querySelector('.inputfield textarea')
  let sendbtn = document.querySelector('#sendbtn');
  let usermessage;
- const API_KEY = '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'
+ const API_KEY = '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'
  
 
 function generator(incoming){
@@ -13,11 +13,11 @@ function generator(incoming){
     const requestOptions = {
         method: "POST",
   headers: {
-    "Authorization": "barier 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",
+    "Authorization": "barier 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",
     "Content-Type": "application/json"
   },
   body: JSON.stringify({
-      "model": "deepseek/deepseek-r1-0528:free",
+      "model": "mistralai/mistral-nemo:free",
     messages: [
                         { role: "system", content: "You are a helpful chatbot." },
                         { role: "user", content: usermessage },
