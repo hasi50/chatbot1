@@ -1,10 +1,10 @@
-let chatbot = document.querySelector('.chatbox')
+ let chatbot = document.querySelector('.chatbox')
  let incoming = document.querySelector('.incoming')
  let outcoming = document.querySelector('.outcoming')
  let inputfield = document.querySelector('.inputfield textarea')
  let sendbtn = document.querySelector('#sendbtn');
  let usermessage;
- const API_KEY = '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'
+ const API_KEY = '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'
  
 
 function generator(incoming){
@@ -13,11 +13,11 @@ function generator(incoming){
     const requestOptions = {
         method: "POST",
   headers: {
-    "Authorization": "barier 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",
+    "Authorization": "barier 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",
     "Content-Type": "application/json"
   },
   body: JSON.stringify({
-      "model": "deepseek/deepseek-r1:free",
+      "model": "deepseek/deepseek-r1-0528:free",
     messages: [
                         { role: "system", content: "You are a helpful chatbot." },
                         { role: "user", content: usermessage },
